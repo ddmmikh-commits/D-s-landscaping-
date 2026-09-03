@@ -81,30 +81,32 @@
   }
 
   /* ------------------------------------------------------------------ */
-  /* Contact form (client-side only — no backend wired up)              */
+  /* Scroll parallax — transform-based, layered depths                  */
   /* ------------------------------------------------------------------ */
-  var form = document.getElementById("contact-form");
-  var note = document.getElementById("form-note");
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-    var data = new FormData(form);
-    var subject = "New quote request from " + (data.get("name") || "website visitor");
-    var body =
-      "Name: " + data.get("name") + "\n" +
-      "Email: " + data.get("email") + "\n" +
-      "Phone: " + (data.get("phone") || "-") + "\n\n" +
-      data.get("message");
-    var mailto =
-      "mailto:hello@dslandscaping.com" +
-      "?subject=" + encodeURIComponent(subject) +
-      "&body=" + encodeURIComponent(body);
-    window.location.href = mailto;
-    note.textContent = "Opening your email app to send this request...";
-  });
+  var parallaxEls = Array.prototype.slice.call(document.querySelectorAll("[data-parallax]"));
+  if (parallaxEls.length && !prefersReducedMotion) {
+    var parallaxTicking = false;
+    var updateParallax = function () {
+      var viewportH = window.innerHeight;
+      parallaxEls.forEach(function (el) {
+        var speed = parseFloat(el.getAttribute("data-parallax")) || 0;
+        var rect = el.getBoundingClientRect();
+        var centerOffset = rect.top + rect.height / 2 - viewportH / 2;
+        var y = (-centerOffset * speed).toFixed(2);
+        el.style.transform = "translateY(" + y + "px)";
+      });
+      parallaxTicking = false;
+    };
+    var requestParallax = function () {
+      if (!parallaxTicking) {
+        requestAnimationFrame(updateParallax);
+        parallaxTicking = true;
+      }
+    };
+    document.addEventListener("scroll", requestParallax, { passive: true });
+    window.addEventListener("resize", requestParallax);
+    updateParallax();
+  }
 
   /* ------------------------------------------------------------------ */
   /* Hero 3D scene (Three.js)                                            */

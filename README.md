@@ -1,33 +1,38 @@
-# D's Landscaping — Website
+# D's Landscaping LLC — Website
 
-A single-page site for D's Landscaping, focused on landscape design & installation.
+A single-page site for D's Landscaping LLC, a landscape contractor in Holyoke, MA.
 Static HTML/CSS/JS — no build step, no framework. Deploys as-is to Vercel, Netlify,
 GitHub Pages, or any static host.
 
 ## Structure
 
-- `index.html` — all page content/sections
+- `index.html` — all page content/sections, SEO metadata, Open Graph tags, and
+  LocalBusiness structured data (JSON-LD)
 - `assets/css/style.css` — dark/gold "bold & premium" theme
 - `assets/js/main.js` — header scroll state, mobile nav, scroll-reveal animations,
-  3D tilt on cards, and the Three.js hero scene (animated wireframe terrain,
-  floating particles, rotating icosahedron cluster)
+  3D tilt on cards, transform-based scroll parallax (reduced-motion aware), and
+  the Three.js hero scene (animated wireframe terrain, floating particles,
+  rotating icosahedron cluster)
+- `favicon.svg`, `assets/img/` — logo mark, favicon, and Open Graph image
 
-## Things to customize before launch
+## Facts used on this site — please verify
 
-These are placeholders and need real values:
+Business details were gathered from the business's Google Maps listing and
+public directory/review sites. Two of them are single-source and should be
+double-checked by the business owner before this goes live:
 
-- **Phone / email** — `index.html`, Contact section (`tel:` and `mailto:` links)
-  and the `#contact-form` submit handler in `assets/js/main.js`.
-- **Service area** — Contact section ("Your City & Surrounding Areas").
-- **Gallery photos** — the `.gallery-item` tiles are CSS-only placeholders.
-  Swap them for real project photos (add an `<img>` inside each tile, or set
-  it as a `background-image`).
-- **Testimonials** — the three quotes are sample text, marked as such on the page.
-- **Contact form delivery** — the form currently opens the visitor's email client
-  via a `mailto:` link (works with zero backend, but requires them to hit "send"
-  in their own mail app). For a submit-and-forget form, wire it to a service like
-  Formspree, Web3Forms, or a small serverless function, and replace the submit
-  handler in `assets/js/main.js`.
+- **Name & address** (6 Ernest Ln, Holyoke, MA 01040) — confirmed directly from
+  the business's Google Maps redirect, high confidence.
+- **Phone** ((413) 455-4631) — found via Nextdoor's business listing only.
+  Not cross-confirmed elsewhere. **Please verify this is correct** — it's used
+  as a tap-to-call link throughout the site (`tel:+14134554631`).
+- **Services** (yard material delivery, junk/debris hauling, powerwashing) —
+  based on category tags from Angi/HomeAdvisor listings.
+- **Hours** and **customer reviews** — could not be reliably retrieved (Yelp
+  and Angi both block automated access). Rather than invent them, the site
+  omits specific hours ("Hours vary seasonally — call to confirm") and links
+  out to the business's real Yelp/Nextdoor/Facebook/Instagram profiles instead
+  of fabricating review quotes.
 
 ## Local preview
 
